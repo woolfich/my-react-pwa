@@ -4,6 +4,11 @@ on:
   push:
     branches: [ main ]
 
+# 👇 ДОБАВЬ ЭТОТ БЛОК, ЧТОБЫ ДАТЬ РАЗРЕШЕНИЯ
+permissions:
+  contents: write  # Дает токену право записывать (пушить) в репозиторий:cite[8]
+# 👆
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -23,8 +28,8 @@ jobs:
     - name: Build project
       run: npm run build
     
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v4  # Можно обновить до v4:cite[1]
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
